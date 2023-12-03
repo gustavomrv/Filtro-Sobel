@@ -243,6 +243,12 @@ int main(int argc, char** argv){
 			{-1, 0, 1}
 		};
 
+		int sobel_vertical[3][3] = {
+			{1, 2, 1},
+			{0, 0, 0},
+			{-1, -2, -1}
+		};
+
 		// Itera sobre lista de arquivos
 		img_rgb = (unsigned char**) malloc (sizeof(unsigned char*));
 		img_gray = (unsigned char**) malloc (sizeof(unsigned char*));
@@ -261,7 +267,7 @@ int main(int argc, char** argv){
 						// Realiza a convolução entre a janela da matriz e o filtro Sobel horizontal
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
-								sum += img_matrix[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
+								sum += img_matrix[j + x][k + y] * sobel_vertical[x + 1][y + 1];
 							}
 						}
 
