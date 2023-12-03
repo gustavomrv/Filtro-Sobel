@@ -1,0 +1,2 @@
+ffmpeg -framerate 24 -i frames_processados/newframe%05d.png -c:v libx264 -pix_fmt yuv420p video/video_processado.mp4
+VIDEO ^
