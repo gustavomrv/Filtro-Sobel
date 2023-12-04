@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <omp.h>
 
 /**
  * img_width: Largura da imagem
@@ -65,6 +66,7 @@ void rgb_to_grayscale(unsigned char* &_src, unsigned char* &_dest){
 	int idx = 0;
 
 	if (img_color_depth == 3) {
+		//#pragma omp parallel for num_threads(7)
 		for (int i = 0; i < img_width*img_height*img_color_depth; i+=img_color_depth){				
 				R = (unsigned int) _src[i];
 				G = (unsigned int) _src[i+1];
@@ -165,10 +167,12 @@ void save_matrix_as_pgm(const int i, int** &_m){
 void convert_to_matrix(unsigned char* &_src, int** &_m){
 	// Aloca matriz
 	_m = (int**) malloc (img_height*(sizeof(int*)));
+	//#pragma omp parallel for num_threads(7)
 	for (int i = 0; i<img_height; i++)
 		_m[i] = (int*) malloc (img_width * sizeof(int));
 
 	// Converte da representacao vetorizada para matricial
+	//#pragma omp parallel for num_threads(7)
 	for (int linha = 0; linha < img_height; linha++){
 		for (int coluna = 0; coluna < img_width; coluna++){
 			_m[linha][coluna] = _src[linha*img_width + coluna];
@@ -238,9 +242,9 @@ int main(int argc, char** argv){
 		int i;
 
 		int sobel_horizontal[3][3] = {
-			{-1, 0, 1},
-			{-2, 0, 2},
-			{-1, 0, 1}
+			{1, 0, -1},
+			{2, 0, -2},
+			{1, 0, -1}
 		};
 
 		int sobel_vertical[3][3] = {
@@ -249,9 +253,12 @@ int main(int argc, char** argv){
 			{-1, -2, -1}
 		};
 
+		double start_time = omp_get_wtime();
+
 		// Itera sobre lista de arquivos
 		img_rgb = (unsigned char**) malloc (sizeof(unsigned char*));
 		img_gray = (unsigned char**) malloc (sizeof(unsigned char*));
+
 		for (i = 0; i < n_files; i++){				
 			if (read_image(i, *img_rgb)){ // Le imagem
 				rgb_to_grayscale(*img_rgb, *img_gray);        // Converte para tons de cinza
@@ -260,24 +267,30 @@ int main(int argc, char** argv){
 				// Faz o processamento que precisar na matrix img_matrix 
 				// 1080 x 1920
 				
+				//#pragma omp parallel for num_threads(7)
+				#pragma omp parallel for num_threads(7)
 				for (int j = 1; j < img_height - 1; j++) {
 					for (int k = 1; k < img_width - 1; k++) {
 						int sum = 0;
 
-						// Realiza a convolução entre a janela da matriz e o filtro Sobel horizontal
+						// Aplica o filtro Sobel 
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
 								sum += img_matrix[j + x][k + y] * sobel_vertical[x + 1][y + 1];
 							}
 						}
 
+						// Calcula o gradiente combinando horizontal e vertical
+						int gradient = sqrt(sum * sum);
+
 						// Limita os valores resultantes entre 0 e 255
-						sum = sum > 255 ? 255 : sum < 0 ? 0 : sum;
+						gradient = gradient > 255 ? 255 : gradient < 0 ? 0 : gradient;
 
 						// Atribui o resultado ao ponto correspondente na nova matriz ou na mesma matriz
-						matriz_final[j][k] = sum;
+						matriz_final[j][k] = gradient;
 					}
 				}
+
 
 
 				// Salva imagem final (Apenas para os temas de convolucao)		
@@ -303,7 +316,10 @@ int main(int argc, char** argv){
 			}
 		}
 		
-		printf("Processamento encerrado!\n\nLiberando memoria e finalizando aplicacao.\n");
+		double end_time = omp_get_wtime();
+		double calc_time = end_time - start_time;
+
+		printf("Processamento encerrado após %lf segundos!\n\nLiberando memoria e finalizando aplicacao.\n", calc_time);
 
 		// Libera memoria da lista de arquivos
 		for (int i = 0; i<n_files; i++)
