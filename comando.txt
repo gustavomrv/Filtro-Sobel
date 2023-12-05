@@ -1,2 +1,6 @@
 ffmpeg -framerate 24 -i frames_processados/newframe%05d.png -c:v libx264 -pix_fmt yuv420p video/video_processado.mp4
 VIDEO ^
+export OMP_NUM_THREADS=1
+export OMP_NUM_THREADS=8
+./ex frames/ f_processados_hori_par/ imagens_para_processar
+g++ codigo_base.cpp -o ex -fopenmp

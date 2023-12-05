@@ -259,16 +259,23 @@ int main(int argc, char** argv){
 		img_rgb = (unsigned char**) malloc (sizeof(unsigned char*));
 		img_gray = (unsigned char**) malloc (sizeof(unsigned char*));
 
+		//#pragma omp single
+		#pragma omp parallel for private(img_matrix, matriz_final)
 		for (i = 0; i < n_files; i++){				
 			if (read_image(i, *img_rgb)){ // Le imagem
 				rgb_to_grayscale(*img_rgb, *img_gray);        // Converte para tons de cinza
+				matriz_final = NULL;
+				img_matrix = NULL;
 				convert_to_matrix(*img_gray, img_matrix);     // Transforma em uma matriz
 				convert_to_matrix(*img_gray, matriz_final);
 				// Faz o processamento que precisar na matrix img_matrix 
 				// 1080 x 1920
+
+				//#pragma omp parallel num_threads(1)
 				
-				//#pragma omp parallel for num_threads(7)
-				#pragma omp parallel for num_threads(7)
+				//#pragma omp parallel for
+				#pragma omp critical 
+				{
 				for (int j = 1; j < img_height - 1; j++) {
 					for (int k = 1; k < img_width - 1; k++) {
 						int sum = 0;
@@ -276,10 +283,10 @@ int main(int argc, char** argv){
 						// Aplica o filtro Sobel 
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
-								sum += img_matrix[j + x][k + y] * sobel_vertical[x + 1][y + 1];
+								sum += img_matrix[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
 							}
 						}
-
+						
 						// Calcula o gradiente combinando horizontal e vertical
 						int gradient = sqrt(sum * sum);
 
@@ -290,13 +297,13 @@ int main(int argc, char** argv){
 						matriz_final[j][k] = gradient;
 					}
 				}
-
+				
 
 
 				// Salva imagem final (Apenas para os temas de convolucao)		
 
 				save_matrix_as_image(i, matriz_final);
-				
+				}
 				
 				// save_matrix_as_pgm(i, img_matrix);
 
