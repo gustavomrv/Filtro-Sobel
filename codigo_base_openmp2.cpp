@@ -6,12 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "mpi.h"
-
-#define STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#define TAG_IMAGE 0
-#define TAG_DATA 1
+#include <omp.h>
 
 /**
  * img_width: Largura da imagem
@@ -228,12 +223,7 @@ void print_filelist(){
 }
 
 int main(int argc, char** argv){
-	double start_time, end_time, calc_time;
-	int rank, size;
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-	start_time = MPI_Wtime();
+	
 	if (argc > 3){    
 		dir_in = argv[1];
 		dir_out = argv[2];
@@ -244,8 +234,8 @@ int main(int argc, char** argv){
 		printf("Iniciando processamento...\n");
 		unsigned char** img_rgb = NULL;
 		unsigned char** img_gray = NULL;
-		int** img_matrix = NULL;
-		int** matriz_final = NULL;
+		int** matriz_entrada = NULL;
+		int** matriz_saida = NULL;
 		int i;
 
 		int sobel_horizontal[3][3] = {
@@ -260,76 +250,81 @@ int main(int argc, char** argv){
 			{-1, -2, -1}
 		};
 
+		double start_time = omp_get_wtime();
+
 		// Itera sobre lista de arquivos
 		img_rgb = (unsigned char**) malloc (sizeof(unsigned char*));
 		img_gray = (unsigned char**) malloc (sizeof(unsigned char*));
-		
-		int local_start, local_end;
-        int local_work = n_files / size; // Divide o trabalho entre os processos
 
-        // Calcula a divisão do trabalho para cada processo
-        local_start = rank * local_work;
-        local_end = local_start + local_work;
-        if (rank == size - 1) {
-            local_end = n_files; // Último processo pode ter mais trabalho se n_files não for divisível por size
-        }
-
-		 for (int i = local_start; i < local_end; i++) {				
+		#pragma omp parallel for private(matriz_entrada, matriz_saida) 
+		for (i = 0; i < n_files; i++){				
 			if (read_image(i, *img_rgb)){ // Le imagem
 				rgb_to_grayscale(*img_rgb, *img_gray);        // Converte para tons de cinza
-				matriz_final = NULL;
-				img_matrix = NULL;
-				convert_to_matrix(*img_gray, img_matrix);     // Transforma em uma matriz
-				convert_to_matrix(*img_gray, matriz_final);
+				matriz_saida = NULL;
+				matriz_entrada = NULL;
+				convert_to_matrix(*img_gray, matriz_entrada);     
+				convert_to_matrix(*img_gray, matriz_saida);
+				
 				// Faz o processamento que precisar na matrix img_matrix 
 				// 1080 x 1920
 
+				
 				for (int j = 1; j < img_height - 1; j++) {
 					for (int k = 1; k < img_width - 1; k++) {
-						int sum = 0;
+						int sum_horizontal = 0;
+                        int sum_vertical = 0;
 
 						// Aplica o filtro Sobel 
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
-								sum += img_matrix[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
+								sum_horizontal += matriz_entrada[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
+							}
+						}
+                        for (int x = -1; x <= 1; x++) {
+							for (int y = -1; y <= 1; y++) {
+								sum_vertical += matriz_entrada[j + x][k + y] * sobel_vertical[x + 1][y + 1];
 							}
 						}
 						
-						// Calcula o gradiente combinando horizontal e vertical
-						int gradient = sqrt(sum * sum);
+						int gradient = sqrt(sum_horizontal * sum_horizontal + sum_vertical * sum_vertical);
 
 						// Limita os valores resultantes entre 0 e 255
-						gradient = gradient > 255 ? 255 : gradient < 0 ? 0 : gradient;
+						gradient = gradient > 255 ? 255 : gradient < 0 ? gradient*(-1) : gradient;
 
 						// Atribui o resultado ao ponto correspondente na nova matriz ou na mesma matriz
-						matriz_final[j][k] = gradient;
+						matriz_saida[j][k] = gradient;
 					}
 				}
 				
-
-
-				// Salva imagem final (Apenas para os temas de convolucao)		
-
-				save_matrix_as_image(i, matriz_final);
 				
-				//save_matrix_as_pgm(i, img_matrix);
+				// Salva imagem final (Apenas para os temas de convolucao)		
+				#pragma omp critical
+				{
+					save_matrix_as_image(i, matriz_saida);
+				}
+				
+				// save_matrix_as_pgm(i, img_matrix);
 
 				// Libera memoria das imgs
 				// printf("Liberando memória da imagem %s\n", file_list[i]);
 				stbi_image_free(*img_rgb); *img_rgb = NULL;
 				stbi_image_free(*img_gray); *img_gray = NULL;
 				for (int l = 0; l < img_height; l++) {
-					free(img_matrix[l]); img_matrix[l] = NULL;
-					free(matriz_final[l]); matriz_final[l] = NULL;
+					free(matriz_entrada[l]); matriz_entrada[l] = NULL;
+					free(matriz_saida[l]); matriz_saida[l] = NULL;
 				}
-				free(img_matrix);
-				free(matriz_final);
+				free(matriz_entrada);
+				free(matriz_saida);
 					
 			} else {
 				printf("Erro lendo imagem %s\n", file_list[i]);
 			}
 		}
+		
+		double end_time = omp_get_wtime();
+		double calc_time = end_time - start_time;
 
+		printf("Processamento encerrado após %lf segundos!\n\nLiberando memoria e finalizando aplicacao.\n", calc_time);
 
 		// Libera memoria da lista de arquivos
 		for (int i = 0; i<n_files; i++)
@@ -343,12 +338,5 @@ int main(int argc, char** argv){
 		printf("./nomeaplicacao diretorio_entrada diretorio_saida lista_arquivos_a_processar.\n");
 	}
 
-	MPI_Barrier(MPI_COMM_WORLD);
-	end_time = MPI_Wtime(); // Termina a contagem de tempo
-    calc_time = end_time - start_time; // Calcula o tempo de execução
-
-    printf("Tempo de execução: %.2lf segundos\n", calc_time);
-
-	MPI_Finalize();
 	return 0;
 }

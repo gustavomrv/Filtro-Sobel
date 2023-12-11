@@ -66,7 +66,6 @@ void rgb_to_grayscale(unsigned char* &_src, unsigned char* &_dest){
 	int idx = 0;
 
 	if (img_color_depth == 3) {
-		//#pragma omp parallel for num_threads(7)
 		for (int i = 0; i < img_width*img_height*img_color_depth; i+=img_color_depth){				
 				R = (unsigned int) _src[i];
 				G = (unsigned int) _src[i+1];
@@ -167,12 +166,10 @@ void save_matrix_as_pgm(const int i, int** &_m){
 void convert_to_matrix(unsigned char* &_src, int** &_m){
 	// Aloca matriz
 	_m = (int**) malloc (img_height*(sizeof(int*)));
-	//#pragma omp parallel for num_threads(7)
 	for (int i = 0; i<img_height; i++)
 		_m[i] = (int*) malloc (img_width * sizeof(int));
 
 	// Converte da representacao vetorizada para matricial
-	//#pragma omp parallel for num_threads(7)
 	for (int linha = 0; linha < img_height; linha++){
 		for (int coluna = 0; coluna < img_width; coluna++){
 			_m[linha][coluna] = _src[linha*img_width + coluna];
@@ -237,8 +234,8 @@ int main(int argc, char** argv){
 		printf("Iniciando processamento...\n");
 		unsigned char** img_rgb = NULL;
 		unsigned char** img_gray = NULL;
-		int** img_matrix = NULL;
-		int** matriz_final = NULL;
+		int** matriz_entrada = NULL;
+		int** matriz_saida = NULL;
 		int i;
 
 		int sobel_horizontal[3][3] = {
@@ -259,23 +256,19 @@ int main(int argc, char** argv){
 		img_rgb = (unsigned char**) malloc (sizeof(unsigned char*));
 		img_gray = (unsigned char**) malloc (sizeof(unsigned char*));
 
-		//#pragma omp single
-		#pragma omp parallel for private(img_matrix, matriz_final)
+		#pragma omp parallel for private(matriz_entrada, matriz_saida) 
 		for (i = 0; i < n_files; i++){				
 			if (read_image(i, *img_rgb)){ // Le imagem
 				rgb_to_grayscale(*img_rgb, *img_gray);        // Converte para tons de cinza
-				matriz_final = NULL;
-				img_matrix = NULL;
-				convert_to_matrix(*img_gray, img_matrix);     // Transforma em uma matriz
-				convert_to_matrix(*img_gray, matriz_final);
+				matriz_saida = NULL;
+				matriz_entrada = NULL;
+				convert_to_matrix(*img_gray, matriz_entrada);     
+				convert_to_matrix(*img_gray, matriz_saida);
+				
 				// Faz o processamento que precisar na matrix img_matrix 
 				// 1080 x 1920
 
-				//#pragma omp parallel num_threads(1)
 				
-				//#pragma omp parallel for
-				#pragma omp critical 
-				{
 				for (int j = 1; j < img_height - 1; j++) {
 					for (int k = 1; k < img_width - 1; k++) {
 						int sum = 0;
@@ -283,26 +276,25 @@ int main(int argc, char** argv){
 						// Aplica o filtro Sobel 
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
-								sum += img_matrix[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
+								sum += matriz_entrada[j + x][k + y] * sobel_vertical[x + 1][y + 1];
 							}
 						}
 						
-						// Calcula o gradiente combinando horizontal e vertical
-						int gradient = sqrt(sum * sum);
+						int gradient = sum;
 
 						// Limita os valores resultantes entre 0 e 255
-						gradient = gradient > 255 ? 255 : gradient < 0 ? 0 : gradient;
+						gradient = gradient > 255 ? 255 : gradient < 0 ? gradient*(-1) : gradient;
 
 						// Atribui o resultado ao ponto correspondente na nova matriz ou na mesma matriz
-						matriz_final[j][k] = gradient;
+						matriz_saida[j][k] = gradient;
 					}
 				}
 				
-
-
+				
 				// Salva imagem final (Apenas para os temas de convolucao)		
-
-				save_matrix_as_image(i, matriz_final);
+				#pragma omp critical
+				{
+					save_matrix_as_image(i, matriz_saida);
 				}
 				
 				// save_matrix_as_pgm(i, img_matrix);
@@ -312,11 +304,11 @@ int main(int argc, char** argv){
 				stbi_image_free(*img_rgb); *img_rgb = NULL;
 				stbi_image_free(*img_gray); *img_gray = NULL;
 				for (int l = 0; l < img_height; l++) {
-					free(img_matrix[l]); img_matrix[l] = NULL;
-					free(matriz_final[l]); matriz_final[l] = NULL;
+					free(matriz_entrada[l]); matriz_entrada[l] = NULL;
+					free(matriz_saida[l]); matriz_saida[l] = NULL;
 				}
-				free(img_matrix);
-				free(matriz_final);
+				free(matriz_entrada);
+				free(matriz_saida);
 					
 			} else {
 				printf("Erro lendo imagem %s\n", file_list[i]);

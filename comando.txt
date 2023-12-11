@@ -5,3 +5,5 @@ export OMP_NUM_THREADS=8
 ./ex frames/ f_processados_hori_par/ imagens_para_processar
 g++ codigo_base.cpp -o ex -fopenmp
 mpic++ codigo_base_mpi.cpp -o ex
+lamboot
+mpirun -np 7 ./ex frames/ mpi_hv/ imagens_para_processar

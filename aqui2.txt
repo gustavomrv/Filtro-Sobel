@@ -1,0 +1,638 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 31.46    181.69   181.69                             main
+ 16.19    275.16    93.47 3080784642     0.00     0.00  stbiw__zlib_countm(unsigned char*, unsigned char*, int)
+ 12.03    344.65    69.49     1800    38.61    98.96  stbi_zlib_compress
+  8.85    395.76    51.12 11663912     0.00     0.01  stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*)
+  7.77    440.62    44.85 62563256     0.00     0.00  stbi__idct_simd(unsigned char*, int, short*)
+  5.70    473.56    32.95     1800    18.30   156.28  stbi_write_png_to_mem
+  4.90    501.85    28.28  1576369     0.02     0.02  stbi__YCbCr_to_RGB_simd(unsigned char*, unsigned char const*, unsigned char const*, unsigned char const*, int, int)
+  2.79    517.98    16.13 1471519868     0.00     0.00  stbiw__paeth(int, int, int)
+  2.70    533.57    15.59  3012700     0.01     0.01  stbi__resample_row_hv_2_simd(unsigned char*, unsigned char*, unsigned char*, int, int)
+  1.45    541.97     8.40     1800     4.67   160.95  save_matrix_as_image(int, int**&)
+  1.21    548.92     6.96 752655745     0.00     0.00  stbiw__zlib_bitrev(int, int)
+  0.99    554.62     5.70 3455237146     0.00     0.00  __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int)
+  0.81    559.30     4.67 786253212     0.00     0.00  stbiw__zhash(unsigned char*)
+  0.57    562.58     3.28 71162617     0.00     0.00  stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*)
+  0.56    565.79     3.21 943594176     0.00     0.00  stbiw__zlib_flushf(unsigned char*, unsigned int*, int*)
+  0.52    568.78     2.99     5400     0.55     0.55  stbiw__crc32(unsigned char*, int)
+  0.43    571.28     2.50     1469     1.70    36.94  stbi__parse_entropy_coded_data(stbi__jpeg*)
+  0.34    573.26     1.98                             _init
+  0.26    574.79     1.53 132010711     0.00     0.00  stbi__jpeg_huff_decode(stbi__jpeg*, stbi__huffman*)
+  0.14    575.63     0.83 39387097     0.00     0.00  stbi__grow_buffer_unsafe(stbi__jpeg*)
+  0.08    576.11     0.47 67038191     0.00     0.00  stbi__mul2shorts_valid(short, short)
+  0.06    576.42     0.32 81489567     0.00     0.00  stbiw__sbgrowf(void**, int, int)
+  0.05    576.71     0.28 27660382     0.00     0.00  stbi__extend_receive(stbi__jpeg*, int)
+  0.04    576.95     0.24 83195222     0.00     0.00  stbi__get8(stbi__context*)
+  0.04    577.18     0.23 62483491     0.00     0.00  stbi__addints_valid(int, int)
+  0.03    577.37     0.18     1169     0.15    84.14  load_jpeg_image(stbi__jpeg*, int*, int*, int*, int)
+  0.00    577.39     0.03   664744     0.00     0.00  stbi__refill_buffer(stbi__context*)
+  0.00    577.41     0.02     5984     0.00     0.00  stbi__build_huffman(stbi__huffman*, int*)
+  0.00    577.42     0.01    12675     0.00     0.00  stbi__get_marker(stbi__jpeg*)
+  0.00    577.44     0.01     2808     0.01     0.01  stbi__build_fast_ac(short*, stbi__huffman*)
+  0.00    577.45     0.01  1553792     0.00     0.00  resample_row_1(unsigned char*, unsigned char*, unsigned char*, int, int)
+  0.00    577.46     0.01     2772     0.00     0.00  convert_to_matrix(unsigned char*&, int**&)
+  0.00    577.47     0.01     1405     0.01     0.01  stbi__process_scan_header(stbi__jpeg*)
+  0.00    577.48     0.01                             stbi__idct_block(unsigned char*, int, short*)
+  0.00    577.48     0.00   691428     0.00     0.00  stbi__stdio_read(void*, char*, int)
+  0.00    577.48     0.00    13834     0.00     0.00  stbi__get16be(stbi__context*)
+  0.00    577.48     0.00    12077     0.00     0.00  stbi__malloc(unsigned long)
+  0.00    577.48     0.00     9708     0.00     0.00  stbi__mul2sizes_valid(int, int)
+  0.00    577.48     0.00     8085     0.00     0.00  stbi__rewind(stbi__context*)
+  0.00    577.48     0.00     7080     0.00     0.00  stbi__addsizes_valid(int, int)
+  0.00    577.48     0.00     5400     0.00     0.55  stbiw__wpcrc(unsigned char**, int)
+  0.00    577.48     0.00     5305     0.00     0.01  stbi__process_marker(stbi__jpeg*, int)
+  0.00    577.48     0.00     4657     0.00     0.00  stbi__malloc_mad2(int, int, int)
+  0.00    577.48     0.00     4013     0.00     0.00  stbi__mad2sizes_valid(int, int, int)
+  0.00    577.48     0.00     3429     0.00     0.00  stbi_image_free
+  0.00    577.48     0.00     3000     0.00     0.00  stbi__setup_jpeg(stbi__jpeg*)
+  0.00    577.48     0.00     2802     0.00     0.00  stbi__mad3sizes_valid(int, int, int, int)
+  0.00    577.48     0.00     2802     0.00     0.02  stbi__decode_jpeg_header(stbi__jpeg*, int)
+  0.00    577.48     0.00     2600     0.00     0.00  stbi__skip(stbi__context*, int)
+  0.00    577.48     0.00     2464     0.00     0.00  stbi__sse2_available()
+  0.00    577.48     0.00     1800     0.00     0.00  stbiw__fopen(char const*, char const*)
+  0.00    577.48     0.00     1800     0.00   156.28  stbi_write_png
+  0.00    577.48     0.00     1603     0.00     0.00  stbi__png_test(stbi__context*)
+  0.00    577.48     0.00     1586     0.00     0.00  stbi__free_jpeg_components(stbi__jpeg*, int, int)
+  0.00    577.48     0.00     1574     0.00    62.50  stbi__load_and_postprocess_8bit(stbi__context*, int*, int*, int*, int)
+  0.00    577.48     0.00     1535     0.00    64.09  read_image(int, unsigned char*&)
+  0.00    577.48     0.00     1533     0.00     0.00  rgb_to_grayscale(unsigned char*&, unsigned char*&)
+  0.00    577.48     0.00     1494     0.00     0.00  stbi__pic_test_core(stbi__context*)
+  0.00    577.48     0.00     1484     0.00     0.02  stbi__jpeg_test(stbi__context*)
+  0.00    577.48     0.00     1484     0.00    66.29  stbi_load_from_file
+  0.00    577.48     0.00     1474     0.00    66.74  stbi_load
+  0.00    577.48     0.00     1473     0.00     0.00  stbi__malloc_mad3(int, int, int, int)
+  0.00    577.48     0.00     1440     0.00     0.00  stbi__cleanup_jpeg(stbi__jpeg*)
+  0.00    577.48     0.00     1436     0.00     0.00  stbi__gif_test(stbi__context*)
+  0.00    577.48     0.00     1434     0.00     0.00  stbi__start_callbacks(stbi__context*, stbi_io_callbacks*, void*)
+  0.00    577.48     0.00     1428     0.00     0.00  stbi__jpeg_reset(stbi__jpeg*)
+  0.00    577.48     0.00     1428     0.00     0.00  stbi__start_file(stbi__context*, _IO_FILE*)
+  0.00    577.48     0.00     1422     0.00     0.00  stbi__fopen(char const*, char const*)
+  0.00    577.48     0.00     1412     0.00     0.00  stbi__psd_test(stbi__context*)
+  0.00    577.48     0.00     1407     0.00     0.00  stbi__gif_test_raw(stbi__context*)
+  0.00    577.48     0.00     1401     0.00    70.20  stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*)
+  0.00    577.48     0.00     1400     0.00     0.00  stbi__pic_is4(stbi__context*, char const*)
+  0.00    577.48     0.00     1386     0.00     0.00  stbi__err(char const*)
+  0.00    577.48     0.00     1378     0.00    71.39  stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int)
+  0.00    577.48     0.00     1376     0.00     0.00  stbi__pic_test(stbi__context*)
+  0.00    577.48     0.00     1353     0.00     0.00  stbi__check_png_header(stbi__context*)
+  0.00    577.48     0.00     1349     0.00     0.00  stbi__process_frame_header(stbi__jpeg*, int)
+  0.00    577.48     0.00     1343     0.00     0.00  stbi__get32be(stbi__context*)
+  0.00    577.48     0.00     1322     0.00     0.00  stbi__bmp_test(stbi__context*)
+  0.00    577.48     0.00     1292     0.00     0.00  stbi__bmp_test_raw(stbi__context*)
+  0.00    577.48     0.00     1224     0.00    44.36  stbi__decode_jpeg_image(stbi__jpeg*)
+  0.00    577.48     0.00        1     0.00     0.00  read_filelist(char const*)
+  0.00    577.48     0.00        1     0.00     0.00  print_filelist()
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.00% of 577.48 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     99.7  181.69  393.80                 main [1]
+                8.40  281.31    1800/1800        save_matrix_as_image(int, int**&) [2]
+                0.00   98.38    1535/1535        read_image(int, unsigned char*&) [8]
+                5.70    0.00 3455237146/3455237146     __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int) [23]
+                0.01    0.00    2772/2772        convert_to_matrix(unsigned char*&, int**&) [45]
+                0.00    0.00    3429/3429        stbi_image_free [62]
+                0.00    0.00    1533/1533        rgb_to_grayscale(unsigned char*&, unsigned char*&) [132]
+                0.00    0.00       1/1           read_filelist(char const*) [138]
+                0.00    0.00       1/1           print_filelist() [139]
+-----------------------------------------------
+                8.40  281.31    1800/1800        main [1]
+[2]     50.2    8.40  281.31    1800         save_matrix_as_image(int, int**&) [2]
+                0.00  281.31    1800/1800        stbi_write_png [3]
+-----------------------------------------------
+                0.00  281.31    1800/1800        save_matrix_as_image(int, int**&) [2]
+[3]     48.7    0.00  281.31    1800         stbi_write_png [3]
+               32.95  248.37    1800/1800        stbi_write_png_to_mem [4]
+                0.00    0.00    1800/1800        stbiw__fopen(char const*, char const*) [130]
+-----------------------------------------------
+               32.95  248.37    1800/1800        stbi_write_png [3]
+[4]     48.7   32.95  248.37    1800         stbi_write_png_to_mem [4]
+               69.49  108.64    1800/1800        stbi_zlib_compress [5]
+               51.12   16.13 11663912/11663912     stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*) [14]
+                0.00    2.99    5400/5400        stbiw__wpcrc(unsigned char**, int) [27]
+-----------------------------------------------
+               69.49  108.64    1800/1800        stbi_write_png_to_mem [4]
+[5]     30.8   69.49  108.64    1800         stbi_zlib_compress [5]
+               93.47    0.00 3080784642/3080784642     stbiw__zlib_countm(unsigned char*, unsigned char*, int) [13]
+                6.96    0.00 752655745/752655745     stbiw__zlib_bitrev(int, int) [21]
+                4.67    0.00 786253212/786253212     stbiw__zhash(unsigned char*) [24]
+                3.21    0.00 943594176/943594176     stbiw__zlib_flushf(unsigned char*, unsigned int*, int*) [25]
+                0.32    0.00 81460420/81489567     stbiw__sbgrowf(void**, int, int) [32]
+-----------------------------------------------
+                0.00   98.38    1484/1484        stbi_load [7]
+[6]     17.0    0.00   98.38    1484         stbi_load_from_file [6]
+                0.00   98.38    1574/1574        stbi__load_and_postprocess_8bit(stbi__context*, int*, int*, int*, int) [9]
+                0.00    0.00    1428/1428        stbi__start_file(stbi__context*, _IO_FILE*) [50]
+-----------------------------------------------
+                0.00   98.38    1474/1474        read_image(int, unsigned char*&) [8]
+[7]     17.0    0.00   98.38    1474         stbi_load [7]
+                0.00   98.38    1484/1484        stbi_load_from_file [6]
+                0.00    0.00    1422/1422        stbi__fopen(char const*, char const*) [136]
+-----------------------------------------------
+                0.00   98.38    1535/1535        main [1]
+[8]     17.0    0.00   98.38    1535         read_image(int, unsigned char*&) [8]
+                0.00   98.38    1474/1474        stbi_load [7]
+-----------------------------------------------
+                0.00   98.38    1574/1574        stbi_load_from_file [6]
+[9]     17.0    0.00   98.38    1574         stbi__load_and_postprocess_8bit(stbi__context*, int*, int*, int*, int) [9]
+                0.00   98.38    1378/1378        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+-----------------------------------------------
+                0.00   98.38    1378/1378        stbi__load_and_postprocess_8bit(stbi__context*, int*, int*, int*, int) [9]
+[10]    17.0    0.00   98.38    1378         stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+                0.00   98.36    1401/1401        stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) [11]
+                0.00    0.02    1484/1484        stbi__jpeg_test(stbi__context*) [39]
+                0.00    0.00    1412/1412        stbi__psd_test(stbi__context*) [51]
+                0.00    0.00    1322/1322        stbi__bmp_test(stbi__context*) [53]
+                0.00    0.00    1376/1376        stbi__pic_test(stbi__context*) [57]
+                0.00    0.00    1603/1603        stbi__png_test(stbi__context*) [58]
+                0.00    0.00    1436/1436        stbi__gif_test(stbi__context*) [60]
+-----------------------------------------------
+                0.00   98.36    1401/1401        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[11]    17.0    0.00   98.36    1401         stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) [11]
+                0.18   98.18    1169/1169        load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+                0.00    0.00    1498/3000        stbi__setup_jpeg(stbi__jpeg*) [126]
+                0.00    0.00    1163/12077       stbi__malloc(unsigned long) [120]
+-----------------------------------------------
+                0.18   98.18    1169/1169        stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) [11]
+[12]    17.0    0.18   98.18    1169         load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+                0.00   54.30    1224/1224        stbi__decode_jpeg_image(stbi__jpeg*) [15]
+               28.28    0.00 1576369/1576369     stbi__YCbCr_to_RGB_simd(unsigned char*, unsigned char const*, unsigned char const*, unsigned char const*, int, int) [18]
+               15.59    0.00 3012700/3012700     stbi__resample_row_hv_2_simd(unsigned char*, unsigned char*, unsigned char*, int, int) [20]
+                0.01    0.00 1553792/1553792     resample_row_1(unsigned char*, unsigned char*, unsigned char*, int, int) [44]
+                0.00    0.00    4465/12077       stbi__malloc(unsigned long) [120]
+                0.00    0.00    1473/1473        stbi__malloc_mad3(int, int, int, int) [133]
+                0.00    0.00    1440/1440        stbi__cleanup_jpeg(stbi__jpeg*) [134]
+-----------------------------------------------
+               93.47    0.00 3080784642/3080784642     stbi_zlib_compress [5]
+[13]    16.2   93.47    0.00 3080784642         stbiw__zlib_countm(unsigned char*, unsigned char*, int) [13]
+-----------------------------------------------
+               51.12   16.13 11663912/11663912     stbi_write_png_to_mem [4]
+[14]    11.6   51.12   16.13 11663912         stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*) [14]
+               16.13    0.00 1471519868/1471519868     stbiw__paeth(int, int, int) [19]
+-----------------------------------------------
+                0.00   54.30    1224/1224        load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[15]     9.4    0.00   54.30    1224         stbi__decode_jpeg_image(stbi__jpeg*) [15]
+                2.50   51.76    1469/1469        stbi__parse_entropy_coded_data(stbi__jpeg*) [16]
+                0.00    0.02    1366/2802        stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+                0.01    0.00    1405/1405        stbi__process_scan_header(stbi__jpeg*) [43]
+                0.00    0.00    2968/12675       stbi__get_marker(stbi__jpeg*) [41]
+-----------------------------------------------
+                2.50   51.76    1469/1469        stbi__decode_jpeg_image(stbi__jpeg*) [15]
+[16]     9.4    2.50   51.76    1469         stbi__parse_entropy_coded_data(stbi__jpeg*) [16]
+               44.85    0.00 62563256/62563256     stbi__idct_simd(unsigned char*, int, short*) [17]
+                3.28    3.62 71162617/71162617     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+                0.00    0.00    1428/1428        stbi__jpeg_reset(stbi__jpeg*) [135]
+-----------------------------------------------
+               44.85    0.00 62563256/62563256     stbi__parse_entropy_coded_data(stbi__jpeg*) [16]
+[17]     7.8   44.85    0.00 62563256         stbi__idct_simd(unsigned char*, int, short*) [17]
+-----------------------------------------------
+               28.28    0.00 1576369/1576369     load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[18]     4.9   28.28    0.00 1576369         stbi__YCbCr_to_RGB_simd(unsigned char*, unsigned char const*, unsigned char const*, unsigned char const*, int, int) [18]
+-----------------------------------------------
+               16.13    0.00 1471519868/1471519868     stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*) [14]
+[19]     2.8   16.13    0.00 1471519868         stbiw__paeth(int, int, int) [19]
+-----------------------------------------------
+               15.59    0.00 3012700/3012700     load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[20]     2.7   15.59    0.00 3012700         stbi__resample_row_hv_2_simd(unsigned char*, unsigned char*, unsigned char*, int, int) [20]
+-----------------------------------------------
+                6.96    0.00 752655745/752655745     stbi_zlib_compress [5]
+[21]     1.2    6.96    0.00 752655745         stbiw__zlib_bitrev(int, int) [21]
+-----------------------------------------------
+                3.28    3.62 71162617/71162617     stbi__parse_entropy_coded_data(stbi__jpeg*) [16]
+[22]     1.2    3.28    3.62 71162617         stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+                1.53    0.00 132010711/132010711     stbi__jpeg_huff_decode(stbi__jpeg*, stbi__huffman*) [29]
+                0.83    0.27 39382130/39387097     stbi__grow_buffer_unsafe(stbi__jpeg*) [30]
+                0.47    0.00 67038191/67038191     stbi__mul2shorts_valid(short, short) [31]
+                0.28    0.00 27660382/27660382     stbi__extend_receive(stbi__jpeg*, int) [33]
+                0.23    0.00 62483491/62483491     stbi__addints_valid(int, int) [35]
+-----------------------------------------------
+                5.70    0.00 3455237146/3455237146     main [1]
+[23]     1.0    5.70    0.00 3455237146         __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int) [23]
+-----------------------------------------------
+                4.67    0.00 786253212/786253212     stbi_zlib_compress [5]
+[24]     0.8    4.67    0.00 786253212         stbiw__zhash(unsigned char*) [24]
+-----------------------------------------------
+                3.21    0.00 943594176/943594176     stbi_zlib_compress [5]
+[25]     0.6    3.21    0.00 943594176         stbiw__zlib_flushf(unsigned char*, unsigned int*, int*) [25]
+                0.00    0.00   29147/81489567     stbiw__sbgrowf(void**, int, int) [32]
+-----------------------------------------------
+                2.99    0.00    5400/5400        stbiw__wpcrc(unsigned char**, int) [27]
+[26]     0.5    2.99    0.00    5400         stbiw__crc32(unsigned char*, int) [26]
+-----------------------------------------------
+                0.00    2.99    5400/5400        stbi_write_png_to_mem [4]
+[27]     0.5    0.00    2.99    5400         stbiw__wpcrc(unsigned char**, int) [27]
+                2.99    0.00    5400/5400        stbiw__crc32(unsigned char*, int) [26]
+-----------------------------------------------
+                                                 <spontaneous>
+[28]     0.3    1.98    0.00                 _init [28]
+-----------------------------------------------
+                1.53    0.00 132010711/132010711     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+[29]     0.3    1.53    0.00 132010711         stbi__jpeg_huff_decode(stbi__jpeg*, stbi__huffman*) [29]
+                0.00    0.00     647/39387097     stbi__grow_buffer_unsafe(stbi__jpeg*) [30]
+-----------------------------------------------
+                0.00    0.00     647/39387097     stbi__jpeg_huff_decode(stbi__jpeg*, stbi__huffman*) [29]
+                0.00    0.00    4320/39387097     stbi__extend_receive(stbi__jpeg*, int) [33]
+                0.83    0.27 39382130/39387097     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+[30]     0.2    0.83    0.27 39387097         stbi__grow_buffer_unsafe(stbi__jpeg*) [30]
+                0.24    0.02 82801608/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.47    0.00 67038191/67038191     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+[31]     0.1    0.47    0.00 67038191         stbi__mul2shorts_valid(short, short) [31]
+-----------------------------------------------
+                0.00    0.00   29147/81489567     stbiw__zlib_flushf(unsigned char*, unsigned int*, int*) [25]
+                0.32    0.00 81460420/81489567     stbi_zlib_compress [5]
+[32]     0.1    0.32    0.00 81489567         stbiw__sbgrowf(void**, int, int) [32]
+-----------------------------------------------
+                0.28    0.00 27660382/27660382     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+[33]     0.0    0.28    0.00 27660382         stbi__extend_receive(stbi__jpeg*, int) [33]
+                0.00    0.00    4320/39387097     stbi__grow_buffer_unsafe(stbi__jpeg*) [30]
+-----------------------------------------------
+                0.00    0.00    1357/83195222     stbi__gif_test_raw(stbi__context*) [61]
+                0.00    0.00    1370/83195222     stbi__check_png_header(stbi__context*) [59]
+                0.00    0.00    1382/83195222     stbi__pic_is4(stbi__context*, char const*) [56]
+                0.00    0.00    1397/83195222     stbi__bmp_test_raw(stbi__context*) [54]
+                0.00    0.00   14002/83195222     stbi__process_scan_header(stbi__jpeg*) [43]
+                0.00    0.00   15273/83195222     stbi__process_frame_header(stbi__jpeg*, int) [48]
+                0.00    0.00   21704/83195222     stbi__get_marker(stbi__jpeg*) [41]
+                0.00    0.00   28061/83195222     stbi__get16be(stbi__context*) [47]
+                0.00    0.00  309068/83195222     stbi__process_marker(stbi__jpeg*, int) [37]
+                0.24    0.02 82801608/83195222     stbi__grow_buffer_unsafe(stbi__jpeg*) [30]
+[34]     0.0    0.24    0.02 83195222         stbi__get8(stbi__context*) [34]
+                0.02    0.00  663383/664744      stbi__refill_buffer(stbi__context*) [38]
+-----------------------------------------------
+                0.23    0.00 62483491/62483491     stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) [22]
+[35]     0.0    0.23    0.00 62483491         stbi__addints_valid(int, int) [35]
+-----------------------------------------------
+                0.00    0.02    1366/2802        stbi__decode_jpeg_image(stbi__jpeg*) [15]
+                0.00    0.02    1436/2802        stbi__jpeg_test(stbi__context*) [39]
+[36]     0.0    0.00    0.05    2802         stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+                0.00    0.04    5305/5305        stbi__process_marker(stbi__jpeg*, int) [37]
+                0.01    0.00    9707/12675       stbi__get_marker(stbi__jpeg*) [41]
+                0.00    0.00    1349/1349        stbi__process_frame_header(stbi__jpeg*, int) [48]
+-----------------------------------------------
+                0.00    0.04    5305/5305        stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+[37]     0.0    0.00    0.04    5305         stbi__process_marker(stbi__jpeg*, int) [37]
+                0.02    0.00    5984/5984        stbi__build_huffman(stbi__huffman*, int*) [40]
+                0.01    0.00    2808/2808        stbi__build_fast_ac(short*, stbi__huffman*) [42]
+                0.00    0.00  309068/83195222     stbi__get8(stbi__context*) [34]
+                0.00    0.00    5491/13834       stbi__get16be(stbi__context*) [47]
+                0.00    0.00    2600/2600        stbi__skip(stbi__context*, int) [128]
+-----------------------------------------------
+                0.00    0.00    1361/664744      stbi__start_callbacks(stbi__context*, stbi_io_callbacks*, void*) [49]
+                0.02    0.00  663383/664744      stbi__get8(stbi__context*) [34]
+[38]     0.0    0.03    0.00  664744         stbi__refill_buffer(stbi__context*) [38]
+                0.00    0.00  691428/691428      stbi__stdio_read(void*, char*, int) [119]
+-----------------------------------------------
+                0.00    0.02    1484/1484        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[39]     0.0    0.00    0.02    1484         stbi__jpeg_test(stbi__context*) [39]
+                0.00    0.02    1436/2802        stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+                0.00    0.00    1502/3000        stbi__setup_jpeg(stbi__jpeg*) [126]
+                0.00    0.00    1284/8085        stbi__rewind(stbi__context*) [122]
+                0.00    0.00    1173/12077       stbi__malloc(unsigned long) [120]
+-----------------------------------------------
+                0.02    0.00    5984/5984        stbi__process_marker(stbi__jpeg*, int) [37]
+[40]     0.0    0.02    0.00    5984         stbi__build_huffman(stbi__huffman*, int*) [40]
+-----------------------------------------------
+                0.00    0.00    2968/12675       stbi__decode_jpeg_image(stbi__jpeg*) [15]
+                0.01    0.00    9707/12675       stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+[41]     0.0    0.01    0.00   12675         stbi__get_marker(stbi__jpeg*) [41]
+                0.00    0.00   21704/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.01    0.00    2808/2808        stbi__process_marker(stbi__jpeg*, int) [37]
+[42]     0.0    0.01    0.00    2808         stbi__build_fast_ac(short*, stbi__huffman*) [42]
+-----------------------------------------------
+                0.01    0.00    1405/1405        stbi__decode_jpeg_image(stbi__jpeg*) [15]
+[43]     0.0    0.01    0.00    1405         stbi__process_scan_header(stbi__jpeg*) [43]
+                0.00    0.00   14002/83195222     stbi__get8(stbi__context*) [34]
+                0.00    0.00    1454/13834       stbi__get16be(stbi__context*) [47]
+-----------------------------------------------
+                0.01    0.00 1553792/1553792     load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[44]     0.0    0.01    0.00 1553792         resample_row_1(unsigned char*, unsigned char*, unsigned char*, int, int) [44]
+-----------------------------------------------
+                0.01    0.00    2772/2772        main [1]
+[45]     0.0    0.01    0.00    2772         convert_to_matrix(unsigned char*&, int**&) [45]
+-----------------------------------------------
+                                                 <spontaneous>
+[46]     0.0    0.01    0.00                 stbi__idct_block(unsigned char*, int, short*) [46]
+-----------------------------------------------
+                0.00    0.00    1454/13834       stbi__process_scan_header(stbi__jpeg*) [43]
+                0.00    0.00    2650/13834       stbi__get32be(stbi__context*) [52]
+                0.00    0.00    4239/13834       stbi__process_frame_header(stbi__jpeg*, int) [48]
+                0.00    0.00    5491/13834       stbi__process_marker(stbi__jpeg*, int) [37]
+[47]     0.0    0.00    0.00   13834         stbi__get16be(stbi__context*) [47]
+                0.00    0.00   28061/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.00    0.00    1349/1349        stbi__decode_jpeg_header(stbi__jpeg*, int) [36]
+[48]     0.0    0.00    0.00    1349         stbi__process_frame_header(stbi__jpeg*, int) [48]
+                0.00    0.00   15273/83195222     stbi__get8(stbi__context*) [34]
+                0.00    0.00    4239/13834       stbi__get16be(stbi__context*) [47]
+                0.00    0.00    4657/4657        stbi__malloc_mad2(int, int, int) [124]
+                0.00    0.00    1410/2802        stbi__mad3sizes_valid(int, int, int, int) [127]
+-----------------------------------------------
+                0.00    0.00    1434/1434        stbi__start_file(stbi__context*, _IO_FILE*) [50]
+[49]     0.0    0.00    0.00    1434         stbi__start_callbacks(stbi__context*, stbi_io_callbacks*, void*) [49]
+                0.00    0.00    1361/664744      stbi__refill_buffer(stbi__context*) [38]
+-----------------------------------------------
+                0.00    0.00    1428/1428        stbi_load_from_file [6]
+[50]     0.0    0.00    0.00    1428         stbi__start_file(stbi__context*, _IO_FILE*) [50]
+                0.00    0.00    1434/1434        stbi__start_callbacks(stbi__context*, stbi_io_callbacks*, void*) [49]
+-----------------------------------------------
+                0.00    0.00    1412/1412        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[51]     0.0    0.00    0.00    1412         stbi__psd_test(stbi__context*) [51]
+                0.00    0.00    1343/1343        stbi__get32be(stbi__context*) [52]
+                0.00    0.00    1285/8085        stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    1343/1343        stbi__psd_test(stbi__context*) [51]
+[52]     0.0    0.00    0.00    1343         stbi__get32be(stbi__context*) [52]
+                0.00    0.00    2650/13834       stbi__get16be(stbi__context*) [47]
+-----------------------------------------------
+                0.00    0.00    1322/1322        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[53]     0.0    0.00    0.00    1322         stbi__bmp_test(stbi__context*) [53]
+                0.00    0.00    1292/1292        stbi__bmp_test_raw(stbi__context*) [54]
+                0.00    0.00    1402/8085        stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    1292/1292        stbi__bmp_test(stbi__context*) [53]
+[54]     0.0    0.00    0.00    1292         stbi__bmp_test_raw(stbi__context*) [54]
+                0.00    0.00    1397/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.00    0.00    1494/1494        stbi__pic_test(stbi__context*) [57]
+[55]     0.0    0.00    0.00    1494         stbi__pic_test_core(stbi__context*) [55]
+                0.00    0.00    1400/1400        stbi__pic_is4(stbi__context*, char const*) [56]
+-----------------------------------------------
+                0.00    0.00    1400/1400        stbi__pic_test_core(stbi__context*) [55]
+[56]     0.0    0.00    0.00    1400         stbi__pic_is4(stbi__context*, char const*) [56]
+                0.00    0.00    1382/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.00    0.00    1376/1376        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[57]     0.0    0.00    0.00    1376         stbi__pic_test(stbi__context*) [57]
+                0.00    0.00    1494/1494        stbi__pic_test_core(stbi__context*) [55]
+                0.00    0.00    1335/8085        stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    1603/1603        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[58]     0.0    0.00    0.00    1603         stbi__png_test(stbi__context*) [58]
+                0.00    0.00    1353/1353        stbi__check_png_header(stbi__context*) [59]
+                0.00    0.00    1341/8085        stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    1353/1353        stbi__png_test(stbi__context*) [58]
+[59]     0.0    0.00    0.00    1353         stbi__check_png_header(stbi__context*) [59]
+                0.00    0.00    1370/83195222     stbi__get8(stbi__context*) [34]
+                0.00    0.00    1386/1386        stbi__err(char const*) [137]
+-----------------------------------------------
+                0.00    0.00    1436/1436        stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) [10]
+[60]     0.0    0.00    0.00    1436         stbi__gif_test(stbi__context*) [60]
+                0.00    0.00    1407/1407        stbi__gif_test_raw(stbi__context*) [61]
+                0.00    0.00    1438/8085        stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    1407/1407        stbi__gif_test(stbi__context*) [60]
+[61]     0.0    0.00    0.00    1407         stbi__gif_test_raw(stbi__context*) [61]
+                0.00    0.00    1357/83195222     stbi__get8(stbi__context*) [34]
+-----------------------------------------------
+                0.00    0.00    3429/3429        main [1]
+[62]     0.0    0.00    0.00    3429         stbi_image_free [62]
+-----------------------------------------------
+                0.00    0.00  691428/691428      stbi__refill_buffer(stbi__context*) [38]
+[119]    0.0    0.00    0.00  691428         stbi__stdio_read(void*, char*, int) [119]
+-----------------------------------------------
+                0.00    0.00    1163/12077       stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) [11]
+                0.00    0.00    1173/12077       stbi__jpeg_test(stbi__context*) [39]
+                0.00    0.00    1308/12077       stbi__malloc_mad3(int, int, int, int) [133]
+                0.00    0.00    3968/12077       stbi__malloc_mad2(int, int, int) [124]
+                0.00    0.00    4465/12077       load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[120]    0.0    0.00    0.00   12077         stbi__malloc(unsigned long) [120]
+-----------------------------------------------
+                0.00    0.00    4000/9708        stbi__mad2sizes_valid(int, int, int) [125]
+                0.00    0.00    5708/9708        stbi__mad3sizes_valid(int, int, int, int) [127]
+[121]    0.0    0.00    0.00    9708         stbi__mul2sizes_valid(int, int) [121]
+-----------------------------------------------
+                0.00    0.00    1284/8085        stbi__jpeg_test(stbi__context*) [39]
+                0.00    0.00    1285/8085        stbi__psd_test(stbi__context*) [51]
+                0.00    0.00    1335/8085        stbi__pic_test(stbi__context*) [57]
+                0.00    0.00    1341/8085        stbi__png_test(stbi__context*) [58]
+                0.00    0.00    1402/8085        stbi__bmp_test(stbi__context*) [53]
+                0.00    0.00    1438/8085        stbi__gif_test(stbi__context*) [60]
+[122]    0.0    0.00    0.00    8085         stbi__rewind(stbi__context*) [122]
+-----------------------------------------------
+                0.00    0.00    2753/7080        stbi__mad3sizes_valid(int, int, int, int) [127]
+                0.00    0.00    4327/7080        stbi__mad2sizes_valid(int, int, int) [125]
+[123]    0.0    0.00    0.00    7080         stbi__addsizes_valid(int, int) [123]
+-----------------------------------------------
+                0.00    0.00    4657/4657        stbi__process_frame_header(stbi__jpeg*, int) [48]
+[124]    0.0    0.00    0.00    4657         stbi__malloc_mad2(int, int, int) [124]
+                0.00    0.00    4013/4013        stbi__mad2sizes_valid(int, int, int) [125]
+                0.00    0.00    3968/12077       stbi__malloc(unsigned long) [120]
+-----------------------------------------------
+                0.00    0.00    4013/4013        stbi__malloc_mad2(int, int, int) [124]
+[125]    0.0    0.00    0.00    4013         stbi__mad2sizes_valid(int, int, int) [125]
+                0.00    0.00    4327/7080        stbi__addsizes_valid(int, int) [123]
+                0.00    0.00    4000/9708        stbi__mul2sizes_valid(int, int) [121]
+-----------------------------------------------
+                0.00    0.00    1498/3000        stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) [11]
+                0.00    0.00    1502/3000        stbi__jpeg_test(stbi__context*) [39]
+[126]    0.0    0.00    0.00    3000         stbi__setup_jpeg(stbi__jpeg*) [126]
+                0.00    0.00    2464/2464        stbi__sse2_available() [129]
+-----------------------------------------------
+                0.00    0.00    1392/2802        stbi__malloc_mad3(int, int, int, int) [133]
+                0.00    0.00    1410/2802        stbi__process_frame_header(stbi__jpeg*, int) [48]
+[127]    0.0    0.00    0.00    2802         stbi__mad3sizes_valid(int, int, int, int) [127]
+                0.00    0.00    5708/9708        stbi__mul2sizes_valid(int, int) [121]
+                0.00    0.00    2753/7080        stbi__addsizes_valid(int, int) [123]
+-----------------------------------------------
+                0.00    0.00    2600/2600        stbi__process_marker(stbi__jpeg*, int) [37]
+[128]    0.0    0.00    0.00    2600         stbi__skip(stbi__context*, int) [128]
+-----------------------------------------------
+                0.00    0.00    2464/2464        stbi__setup_jpeg(stbi__jpeg*) [126]
+[129]    0.0    0.00    0.00    2464         stbi__sse2_available() [129]
+-----------------------------------------------
+                0.00    0.00    1800/1800        stbi_write_png [3]
+[130]    0.0    0.00    0.00    1800         stbiw__fopen(char const*, char const*) [130]
+-----------------------------------------------
+                0.00    0.00    1586/1586        stbi__cleanup_jpeg(stbi__jpeg*) [134]
+[131]    0.0    0.00    0.00    1586         stbi__free_jpeg_components(stbi__jpeg*, int, int) [131]
+-----------------------------------------------
+                0.00    0.00    1533/1533        main [1]
+[132]    0.0    0.00    0.00    1533         rgb_to_grayscale(unsigned char*&, unsigned char*&) [132]
+-----------------------------------------------
+                0.00    0.00    1473/1473        load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[133]    0.0    0.00    0.00    1473         stbi__malloc_mad3(int, int, int, int) [133]
+                0.00    0.00    1392/2802        stbi__mad3sizes_valid(int, int, int, int) [127]
+                0.00    0.00    1308/12077       stbi__malloc(unsigned long) [120]
+-----------------------------------------------
+                0.00    0.00    1440/1440        load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) [12]
+[134]    0.0    0.00    0.00    1440         stbi__cleanup_jpeg(stbi__jpeg*) [134]
+                0.00    0.00    1586/1586        stbi__free_jpeg_components(stbi__jpeg*, int, int) [131]
+-----------------------------------------------
+                0.00    0.00    1428/1428        stbi__parse_entropy_coded_data(stbi__jpeg*) [16]
+[135]    0.0    0.00    0.00    1428         stbi__jpeg_reset(stbi__jpeg*) [135]
+-----------------------------------------------
+                0.00    0.00    1422/1422        stbi_load [7]
+[136]    0.0    0.00    0.00    1422         stbi__fopen(char const*, char const*) [136]
+-----------------------------------------------
+                0.00    0.00    1386/1386        stbi__check_png_header(stbi__context*) [59]
+[137]    0.0    0.00    0.00    1386         stbi__err(char const*) [137]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[138]    0.0    0.00    0.00       1         read_filelist(char const*) [138]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[139]    0.0    0.00    0.00       1         print_filelist() [139]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [8] read_image(int, unsigned char*&) [11] stbi__jpeg_load(stbi__context*, int*, int*, int*, int, stbi__result_info*) (stb_image.h) [121] stbi__mul2sizes_valid(int, int) (stb_image.h)
+ [138] read_filelist(char const*) [39] stbi__jpeg_test(stbi__context*) (stb_image.h) [49] stbi__start_callbacks(stbi__context*, stbi_io_callbacks*, void*) (stb_image.h)
+ [139] print_filelist()       [10] stbi__load_main(stbi__context*, int*, int*, int*, int, stbi__result_info*, int) (stb_image.h) [59] stbi__check_png_header(stbi__context*) (stb_image.h)
+ [132] rgb_to_grayscale(unsigned char*&, unsigned char*&) [41] stbi__get_marker(stbi__jpeg*) (stb_image.h) [29] stbi__jpeg_huff_decode(stbi__jpeg*, stbi__huffman*) (stb_image.h)
+  [45] convert_to_matrix(unsigned char*&, int**&) [46] stbi__idct_block(unsigned char*, int, short*) (stb_image.h) [31] stbi__mul2shorts_valid(short, short) (stb_image.h)
+   [2] save_matrix_as_image(int, int**&) [135] stbi__jpeg_reset(stbi__jpeg*) (stb_image.h) [14] stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*) (stb_image_write.h)
+  [34] stbi__get8(stbi__context*) (stb_image.h) [126] stbi__setup_jpeg(stbi__jpeg*) (stb_image.h) [18] stbi__YCbCr_to_RGB_simd(unsigned char*, unsigned char const*, unsigned char const*, unsigned char const*, int, int) (stb_image.h)
+ [128] stbi__skip(stbi__context*, int) (stb_image.h) [50] stbi__start_file(stbi__context*, _IO_FILE*) (stb_image.h) [15] stbi__decode_jpeg_image(stbi__jpeg*) (stb_image.h)
+ [136] stbi__fopen(char const*, char const*) (stb_image.h) [119] stbi__stdio_read(void*, char*, int) (stb_image.h) [22] stbi__jpeg_decode_block(stbi__jpeg*, short*, stbi__huffman*, stbi__huffman*, short*, int, unsigned short*) (stb_image.h)
+ [120] stbi__malloc(unsigned long) (stb_image.h) [124] stbi__malloc_mad2(int, int, int) (stb_image.h) [36] stbi__decode_jpeg_header(stbi__jpeg*, int) (stb_image.h)
+ [122] stbi__rewind(stbi__context*) (stb_image.h) [133] stbi__malloc_mad3(int, int, int, int) (stb_image.h) [30] stbi__grow_buffer_unsafe(stbi__jpeg*) (stb_image.h)
+  [26] stbiw__crc32(unsigned char*, int) (stb_image_write.h) [54] stbi__bmp_test_raw(stbi__context*) (stb_image.h) [43] stbi__process_scan_header(stbi__jpeg*) (stb_image.h)
+ [130] stbiw__fopen(char const*, char const*) (stb_image_write.h) [134] stbi__cleanup_jpeg(stbi__jpeg*) (stb_image.h) [131] stbi__free_jpeg_components(stbi__jpeg*, int, int) (stb_image.h)
+  [19] stbiw__paeth(int, int, int) (stb_image_write.h) [61] stbi__gif_test_raw(stbi__context*) (stb_image.h) [48] stbi__process_frame_header(stbi__jpeg*, int) (stb_image.h)
+  [27] stbiw__wpcrc(unsigned char**, int) (stb_image_write.h) [21] stbiw__zlib_bitrev(int, int) (stb_image_write.h) [20] stbi__resample_row_hv_2_simd(unsigned char*, unsigned char*, unsigned char*, int, int) (stb_image.h)
+  [24] stbiw__zhash(unsigned char*) (stb_image_write.h) [13] stbiw__zlib_countm(unsigned char*, unsigned char*, int) (stb_image_write.h) [16] stbi__parse_entropy_coded_data(stbi__jpeg*) (stb_image.h)
+  [47] stbi__get16be(stbi__context*) (stb_image.h) [25] stbiw__zlib_flushf(unsigned char*, unsigned int*, int*) (stb_image_write.h) [9] stbi__load_and_postprocess_8bit(stbi__context*, int*, int*, int*, int) (stb_image.h)
+  [52] stbi__get32be(stbi__context*) (stb_image.h) [35] stbi__addints_valid(int, int) (stb_image.h) [137] stbi__err(char const*) (stb_image.h)
+  [56] stbi__pic_is4(stbi__context*, char const*) (stb_image.h) [42] stbi__build_fast_ac(short*, stbi__huffman*) (stb_image.h) [23] __gnu_cxx::__enable_if<std::__is_integer<int>::__value, double>::__type std::sqrt<int>(int)
+  [44] resample_row_1(unsigned char*, unsigned char*, unsigned char*, int, int) (stb_image.h) [40] stbi__build_huffman(stbi__huffman*, int*) (stb_image.h) [28] _init
+  [53] stbi__bmp_test(stbi__context*) (stb_image.h) [55] stbi__pic_test_core(stbi__context*) (stb_image.h) [1] main
+  [60] stbi__gif_test(stbi__context*) (stb_image.h) [38] stbi__refill_buffer(stbi__context*) (stb_image.h) [62] stbi_image_free
+  [57] stbi__pic_test(stbi__context*) (stb_image.h) [123] stbi__addsizes_valid(int, int) (stb_image.h) [7] stbi_load
+  [58] stbi__png_test(stbi__context*) (stb_image.h) [33] stbi__extend_receive(stbi__jpeg*, int) (stb_image.h) [6] stbi_load_from_file
+  [51] stbi__psd_test(stbi__context*) (stb_image.h) [37] stbi__process_marker(stbi__jpeg*, int) (stb_image.h) [3] stbi_write_png
+  [32] stbiw__sbgrowf(void**, int, int) (stb_image_write.h) [129] stbi__sse2_available() (stb_image.h) [4] stbi_write_png_to_mem
+  [12] load_jpeg_image(stbi__jpeg*, int*, int*, int*, int) (stb_image.h) [125] stbi__mad2sizes_valid(int, int, int) (stb_image.h) [5] stbi_zlib_compress
+  [17] stbi__idct_simd(unsigned char*, int, short*) (stb_image.h) [127] stbi__mad3sizes_valid(int, int, int, int) (stb_image.h)
