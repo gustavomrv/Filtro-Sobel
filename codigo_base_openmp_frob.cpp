@@ -222,6 +222,18 @@ void print_filelist(){
 		printf("Arquivo: %s\n", file_list[i]);
 }
 
+double frobenius_norm(int** matrix, int rows, int cols) {
+    double norm = 0.0;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            norm += matrix[i][j] * matrix[i][j]; // Eleva ao quadrado e soma os elementos
+        }
+    }
+
+    return sqrt(norm); // Retorna a raiz quadrada da soma dos quadrados
+}
+
 int main(int argc, char** argv){
 	
 	if (argc > 3){    
@@ -230,6 +242,9 @@ int main(int argc, char** argv){
 
 		read_filelist(argv[3]);
 		print_filelist();
+
+		int frobenius[1800];
+		int valido = 1;
 
 		printf("Iniciando processamento...\n");
 		unsigned char** img_rgb = NULL;
@@ -276,7 +291,7 @@ int main(int argc, char** argv){
 						// Aplica o filtro Sobel 
 						for (int x = -1; x <= 1; x++) {
 							for (int y = -1; y <= 1; y++) {
-								sum += matriz_entrada[j + x][k + y] * sobel_vertical[x + 1][y + 1];
+								sum += matriz_entrada[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
 							}
 						}
 						
@@ -292,6 +307,10 @@ int main(int argc, char** argv){
 				
 				
 				// Salva imagem final (Apenas para os temas de convolucao)		
+
+				frobenius[i] = frobenius_norm(matriz_saida, img_height, img_width);
+				//printf("Frob: %d\n", frobenius[i]);
+
 				#pragma omp critical
 				{
 					save_matrix_as_image(i, matriz_saida);
@@ -315,9 +334,74 @@ int main(int argc, char** argv){
 			}
 		}
 		
+		for (i = 0; i < n_files; i++){				
+			if (read_image(i, *img_rgb)){ // Le imagem
+				rgb_to_grayscale(*img_rgb, *img_gray);        // Converte para tons de cinza
+				matriz_saida = NULL;
+				matriz_entrada = NULL;
+				convert_to_matrix(*img_gray, matriz_entrada);     
+				convert_to_matrix(*img_gray, matriz_saida);
+				
+				// Faz o processamento que precisar na matrix img_matrix 
+				// 1080 x 1920
+
+				
+				for (int j = 1; j < img_height - 1; j++) {
+					for (int k = 1; k < img_width - 1; k++) {
+						int sum = 0;
+
+						// Aplica o filtro Sobel 
+						for (int x = -1; x <= 1; x++) {
+							for (int y = -1; y <= 1; y++) {
+								sum += matriz_entrada[j + x][k + y] * sobel_horizontal[x + 1][y + 1];
+							}
+						}
+						
+						int gradient = sum;
+
+						// Limita os valores resultantes entre 0 e 255
+						gradient = gradient > 255 ? 255 : gradient < 0 ? gradient*(-1) : gradient;
+
+						// Atribui o resultado ao ponto correspondente na nova matriz ou na mesma matriz
+						matriz_saida[j][k] = gradient;
+					}
+				}
+				
+				
+				// Salva imagem final (Apenas para os temas de convolucao)		
+
+				int frobenius_seq = frobenius_norm(matriz_saida, img_height, img_width);
+				if (frobenius_seq != frobenius[i]) {
+					printf("pos %d, seq %d, par %d\n", i, frobenius_seq, frobenius[i]);
+					valido = 0;
+
+				}
+
+
+				//save_matrix_as_image(i, matriz_saida);
+
+				
+				// save_matrix_as_pgm(i, img_matrix);
+
+				// Libera memoria das imgs
+				// printf("Liberando memória da imagem %s\n", file_list[i]);
+				stbi_image_free(*img_rgb); *img_rgb = NULL;
+				stbi_image_free(*img_gray); *img_gray = NULL;
+				for (int l = 0; l < img_height; l++) {
+					free(matriz_entrada[l]); matriz_entrada[l] = NULL;
+					free(matriz_saida[l]); matriz_saida[l] = NULL;
+				}
+				free(matriz_entrada);
+				free(matriz_saida);
+					
+			} else {
+				printf("Erro lendo imagem %s\n", file_list[i]);
+			}
+		}
+		
 		double end_time = omp_get_wtime();
 		double calc_time = end_time - start_time;
-
+		printf("Validade: %d\n", valido);
 		printf("Processamento encerrado após %lf segundos!\n\nLiberando memoria e finalizando aplicacao.\n", calc_time);
 
 		// Libera memoria da lista de arquivos

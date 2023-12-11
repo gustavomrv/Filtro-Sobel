@@ -227,6 +227,8 @@ void print_filelist(){
 		printf("Arquivo: %s\n", file_list[i]);
 }
 
+
+
 int main(int argc, char** argv){
 	double start_time, end_time, calc_time;
 	int rank, size;
